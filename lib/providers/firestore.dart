@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+/*
 var firestore = Firestore.instance;
 
 Future getCategoriestmp() async {
@@ -9,7 +10,7 @@ Future getCategoriestmp() async {
   return qn.documents;
 }
 
-/*
+
 Future getSubCategories() async {
   QuerySnapshot qn = await firestore
       .collection("Category")
@@ -20,7 +21,7 @@ Future getSubCategories() async {
 
   return qn;
 }
-*/
+
 
 Future getSubCategoriestmp() async {
   QuerySnapshot qn = await firestore
@@ -43,7 +44,7 @@ Future getSubCategoriestmp() async {
 
   return qn;
 }
-/*
+
 Future getSubcategories() async {
   List SubaccountList = await Firestore.instance
       .collection("Category")
@@ -63,7 +64,7 @@ Future getSubcategories() async {
     });
   }
 }
-*/
+
 
 Future getSubcategories() async {
   List SubaccountList = await Firestore.instance
@@ -80,3 +81,8 @@ Future getSubcategories() async {
         .then((value) => value.documents);
   }
 }
+
+
+FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+*/
