@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "676987140332",
+    "firebase_url": "https://fitizmir-dev.firebaseio.com",
+    "project_id": "fitizmir-dev",
+    "storage_bucket": "fitizmir-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:676987140332:android:65aa8f8b9605b225f08dc9",
+        "android_client_info": {
+          "package_name": "com.example.fitizmir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "676987140332-vijlae1rdf4basqhqaavcpgb2hj0krq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjFUBE2iquHL8wMBJjXNvIEsTDeqPvquI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "676987140332-vijlae1rdf4basqhqaavcpgb2hj0krq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
