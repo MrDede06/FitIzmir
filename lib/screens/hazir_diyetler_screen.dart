@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -51,7 +52,6 @@ class HazirDiyetlerScreen extends StatelessWidget {
                     ),
                     Positioned(
                       bottom: 20,
-                      right: 10,
                       child: Container(
                         width: 150,
                         color: Colors.black54,
