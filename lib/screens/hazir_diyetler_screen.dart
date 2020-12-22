@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,7 +9,7 @@ class HazirDiyetlerScreen extends StatelessWidget {
   static const routeName = '/hazirdiyetler';
 
   Widget build(BuildContext context) {
-
+    final screen_width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
@@ -52,8 +53,9 @@ class HazirDiyetlerScreen extends StatelessWidget {
                     ),
                     Positioned(
                       bottom: 20,
-                      child: Container(
-                        width: 150,
+                      child: SizedBox(
+                        width: (screen_width - 10)/2,
+                        child: Container(
                         color: Colors.black54,
                         padding: EdgeInsets.symmetric(
                           vertical: 5,
@@ -68,7 +70,9 @@ class HazirDiyetlerScreen extends StatelessWidget {
                           softWrap: true,
                           overflow: TextOverflow.fade,
                         ),
+
                       ),
+                    ),
                     ),
                   ],
                 ),
