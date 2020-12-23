@@ -38,8 +38,9 @@ class HazirDiyetlerDetayScreen extends StatelessWidget {
           ),
           Container(
             height: (mediaQuery.size.height - mediaQuery.padding.top) * 0.06,
-            child: InkWell(
-              onTap: () => print("dsfjdjkfas"),
+            child: (args.fiyat == 0) ?
+            InkWell(
+              onTap: () => print("indir"),
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.blueGrey,
@@ -48,23 +49,36 @@ class HazirDiyetlerDetayScreen extends StatelessWidget {
                 ),
                 margin: EdgeInsets.all(2),
                 padding: EdgeInsets.all(10),
-                child: (args.fiyat == 0) ?  Text(
+                child: Text(
                   "Indir",
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),
                 )
-                : Text(
+
+              ),
+            ) : InkWell(
+              onTap: () => print("Satin al"),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                margin: EdgeInsets.all(2),
+                padding: EdgeInsets.all(10),
+                child:
+                    Text(
                   "Satın Al" + "  " + args.fiyat.toString() + '₺',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),
 
-    ),
+                ),
               ),
-            ),
+            )
           ),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,

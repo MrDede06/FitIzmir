@@ -46,7 +46,7 @@ class HazirDiyetlerScreen extends StatelessWidget {
                       HazirDiyetlerDetayScreen.routeName,
                       arguments: HazirDiyetScreenArgs(
                           paketler[index]['isim'],
-                          paketler[index]['fiyat'],
+                          paketler[index]['fiyat'].toDouble(),
                           paketler[index]['aciklama'],
                           paketler[index]['bedava'],
                           paketler[index]['pdf'],
