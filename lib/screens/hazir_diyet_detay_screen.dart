@@ -48,13 +48,21 @@ class HazirDiyetlerDetayScreen extends StatelessWidget {
                 ),
                 margin: EdgeInsets.all(2),
                 padding: EdgeInsets.all(10),
-                child: Text(
+                child: (args.fiyat == 0) ?  Text(
+                  "Indir",
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                )
+                : Text(
                   "Satın Al" + "  " + args.fiyat.toString() + '₺',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,
                   ),
-                ),
+
+    ),
               ),
             ),
           ),

@@ -9,7 +9,7 @@ class HazirDiyetScreenArgs{
   final String isim;
   final String aciklama;
   final bool bedava;
-  final int fiyat;
+  final double fiyat;
   final String pdf;
   final String resim;
   HazirDiyetScreenArgs(this.isim, this.fiyat, this.aciklama, this.bedava, this.pdf, this.resim);
