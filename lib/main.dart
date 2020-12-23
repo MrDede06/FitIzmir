@@ -5,6 +5,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fitizmir/screens/auth_screen.dart';
 import 'package:fitizmir/screens/home_screen.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
+import 'package:fitizmir/screens/hazir_diyet_detay_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Fit Izmir',
       theme: ThemeData(
+        fontFamily: 'Raleway',
         primaryColor: Colors.white,
         accentColor: Colors.black87,
       ),
@@ -35,6 +37,7 @@ class MyApp extends StatelessWidget {
           }),
       routes: {
         HazirDiyetlerScreen.routeName: (ctx) => HazirDiyetlerScreen(),
+        HazirDiyetlerDetayScreen.routeName: (ctx) => HazirDiyetlerDetayScreen(),
       },
     );
   }
