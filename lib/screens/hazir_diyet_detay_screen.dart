@@ -1,64 +1,13 @@
-import 'dart:io';
-
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
-import 'package:dio/dio.dart';
-import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 
-class HazirDiyetlerDetayScreen extends StatefulWidget {
+class HazirDiyetlerDetayScreen extends StatelessWidget {
   static const routeName = '/hazirdiyetlerdetay';
-
-  @override
-  _HazirDiyetlerDetayScreenState createState() =>
-      _HazirDiyetlerDetayScreenState();
-}
-
-class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
-  var dio = Dio();
-  void initState(){
-    getPermission();
-  }
-  void getPermission() async {
-    print("getPermission");
-    await PermissionHandler().requestPermissions([PermissionGroup.storage]);
-  }
-
-  Future download2(Dio dio, String url, String savePath) async {
-    //get pdf from link
-    print("functin called");
-    final PermissionHandler _permissionHandler = PermissionHandler();
-    var result = await _permissionHandler.requestPermissions([PermissionGroup.storage]);
-    print(result);
-    if (result[PermissionGroup.storage] == PermissionStatus.granted) {
-    Response response = await dio.get(
-      url,
-//      onReceiveProgress: showDownloadProgress,
-      //Received data with List<int>
-      options: Options(
-          responseType: ResponseType.bytes,
-          followRedirects: false,
-          validateStatus: (status) {
-            return status < 500;
-          }),
-    );
-
-    //write in download folder
-    File file = File(savePath);
-    var raf = file.openSync(mode: FileMode.write);
-    raf.writeFromSync(response.data);
-    await raf.close();}
-  }
-  void showDownloadProgress(received, total) {
-    if (total != -1) {
-      print((received / total * 100).toStringAsFixed(0) + "%");
-    }
-  }
-
-  Future<void> download3() async{
-    print("function called");
-  }
 
   Widget build(BuildContext context) {
     final HazirDiyetScreenArgs args = ModalRoute.of(context).settings.arguments;
@@ -97,38 +46,57 @@ class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
               child: (args.fiyat == 0)
                   ? InkWell(
                       onTap: ()async{
-//                        String path = await ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS);
-//                        String directory = await StoragePath.filePath;
-                        final directory = await getApplicationDocumentsDirectory();
-//                        print(directory);
-//                        String fullPath = "${directory}/diyet.pdf";
-//                        Dio dio = Dio();
-//                        await dio.download(args.pdf, directory.path);
-
-                        download2(dio, args.pdf, directory.path);
+                        final status = await Permission.storage.request();
+                        if(status.isGranted){
+                          final externalDir = await getExternalStorageDirectory();
+                          final id = await FlutterDownloader.enqueue(
+                            url: args.pdf,
+                            savedDir: externalDir.path,
+                            fileName: "download.pdf",
+                            showNotification: true,
+                            openFileFromNotification: true,
+                          );
+                        }else{
+                          print("Permission deined");
+                        }
                       },
                       child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.blueGrey,
+                            color: Colors.blueGrey[50],
                             border: Border.all(color: Colors.grey),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           margin: EdgeInsets.all(2),
                           padding: EdgeInsets.all(10),
-                          child: Text(
-                            "Indir",
+                          width: 80,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                          Text(
+                            "İndir",
                             style: TextStyle(
                               fontSize: 16,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
-                          )),
+                          ),
+                              SizedBox(
+                                width: 4,
+                              ),
+                              Icon(
+                                Icons.file_download,
+                                color: Colors.black,
+                                size: 16,
+                              ),
+    ],
+    ),
+                      ),
                     )
                   : InkWell(
                       onTap: () => print("Satin al"),
                       splashColor: Colors.blueGrey,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.blueGrey,
+                          color: Colors.blueGrey[50],
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -138,25 +106,25 @@ class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
                           "Satın Al" + "  " + args.fiyat.toString() + '₺',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                         ),
                       ),
                     )),
           Container(
             height: (mediaQuery.size.height - mediaQuery.padding.top) * 0.5,
-            decoration: BoxDecoration(
-              color: Colors.blueGrey,
-              border: Border.all(color: Colors.grey),
-            ),
+//            decoration: BoxDecoration(
+//              color: Colors.blueGrey,
+//              border: Border.all(color: Colors.grey),
+//            ),
             margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
             padding: EdgeInsets.all(5),
             child: SingleChildScrollView(
               child: Text(
                 args.aciklama.replaceAll("\\n", "\n"),
                 style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.white,
+                  fontSize: 16,
+                  color: Colors.black,
                 ),
               ),
             ),

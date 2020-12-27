@@ -6,11 +6,15 @@ import 'package:fitizmir/screens/auth_screen.dart';
 import 'package:fitizmir/screens/home_screen.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
 import 'package:fitizmir/screens/hazir_diyet_detay_screen.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   WidgetsFlutterBinding.ensureInitialized();
+  await FlutterDownloader.initialize(
+      debug: true // optional: set false to disable printing logs to console
+  );
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
