@@ -20,7 +20,7 @@ class HomeScreen extends StatelessWidget {
             children: <Widget>[
               Container(
                 height: (mediaQuery.size.height -
-                    mediaQuery.padding.top) *
+                    mediaQuery.padding.top - mediaQuery.padding.bottom) *
                     0.25
                 ,
                 child: Row(
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
               ),
               Container(
                 height: (mediaQuery.size.height -
-              mediaQuery.padding.top) *
+              mediaQuery.padding.top - mediaQuery.padding.bottom) *
                   0.75,
                 child: GridView.count(
                   crossAxisCount: 2,

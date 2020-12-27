@@ -1,18 +1,65 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:path_provider/path_provider.dart';
 
-class HazirDiyetlerDetayScreen extends StatelessWidget {
-  void getHttp(url) async {
-    try {
-      Response response = await Dio().download(url, 'file.pdf');
-      print(response);
-    } catch (e) {
-      print(e);
+class HazirDiyetlerDetayScreen extends StatefulWidget {
+  static const routeName = '/hazirdiyetlerdetay';
+
+  @override
+  _HazirDiyetlerDetayScreenState createState() =>
+      _HazirDiyetlerDetayScreenState();
+}
+
+class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
+  var dio = Dio();
+  void initState(){
+    getPermission();
+  }
+  void getPermission() async {
+    print("getPermission");
+    await PermissionHandler().requestPermissions([PermissionGroup.storage]);
+  }
+
+  Future download2(Dio dio, String url, String savePath) async {
+    //get pdf from link
+    print("functin called");
+    final PermissionHandler _permissionHandler = PermissionHandler();
+    var result = await _permissionHandler.requestPermissions([PermissionGroup.storage]);
+    print(result);
+    if (result[PermissionGroup.storage] == PermissionStatus.granted) {
+    Response response = await dio.get(
+      url,
+//      onReceiveProgress: showDownloadProgress,
+      //Received data with List<int>
+      options: Options(
+          responseType: ResponseType.bytes,
+          followRedirects: false,
+          validateStatus: (status) {
+            return status < 500;
+          }),
+    );
+
+    //write in download folder
+    File file = File(savePath);
+    var raf = file.openSync(mode: FileMode.write);
+    raf.writeFromSync(response.data);
+    await raf.close();}
+  }
+  void showDownloadProgress(received, total) {
+    if (total != -1) {
+      print((received / total * 100).toStringAsFixed(0) + "%");
     }
   }
-  static const routeName = '/hazirdiyetlerdetay';
+
+  Future<void> download3() async{
+    print("function called");
+  }
+
   Widget build(BuildContext context) {
     final HazirDiyetScreenArgs args = ModalRoute.of(context).settings.arguments;
     final mediaQuery = MediaQuery.of(context);
@@ -49,7 +96,17 @@ class HazirDiyetlerDetayScreen extends StatelessWidget {
               height: (mediaQuery.size.height - mediaQuery.padding.top) * 0.06,
               child: (args.fiyat == 0)
                   ? InkWell(
-                      onTap: () => getHttp(args.pdf),
+                      onTap: ()async{
+//                        String path = await ExtStorage.getExternalStoragePublicDirectory(ExtStorage.DIRECTORY_DOWNLOADS);
+//                        String directory = await StoragePath.filePath;
+                        final directory = await getApplicationDocumentsDirectory();
+//                        print(directory);
+//                        String fullPath = "${directory}/diyet.pdf";
+//                        Dio dio = Dio();
+//                        await dio.download(args.pdf, directory.path);
+
+                        download2(dio, args.pdf, directory.path);
+                      },
                       child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blueGrey,
