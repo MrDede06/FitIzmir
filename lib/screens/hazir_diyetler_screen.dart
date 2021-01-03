@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fitizmir/screens/hazir_diyet_detay_screen.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 
 class HazirDiyetScreenArgs {
   final String isim;
@@ -15,15 +16,9 @@ class HazirDiyetScreenArgs {
       this.isim, this.fiyat, this.aciklama, this.bedava, this.pdf, this.resim);
 }
 
-class HazirDiyetlerScreen extends StatefulWidget {
+class HazirDiyetlerScreen extends StatelessWidget {
   static const routeName = '/hazirdiyetler';
 
-  @override
-  _HazirDiyetlerScreenState createState() => _HazirDiyetlerScreenState();
-}
-
-class _HazirDiyetlerScreenState extends State<HazirDiyetlerScreen> {
-  bool selected = false;
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -46,8 +41,9 @@ class _HazirDiyetlerScreenState extends State<HazirDiyetlerScreen> {
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisSpacing: 2, mainAxisSpacing: 2, crossAxisCount: 2),
             itemCount: paketler.length,
-            itemBuilder: (ctx, index) => InkWell(
-              onTap: () => {
+            itemBuilder: (ctx, index) => Bounce(
+              duration: Duration(milliseconds: 250),
+              onPressed: () => {
                 Navigator.pushNamed(
                   ctx,
                   HazirDiyetlerDetayScreen.routeName,

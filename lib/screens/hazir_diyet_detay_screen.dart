@@ -7,17 +7,9 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class HazirDiyetlerDetayScreen extends StatefulWidget {
+
+class HazirDiyetlerDetayScreen extends StatelessWidget {
   static const routeName = '/hazirdiyetlerdetay';
-
-  @override
-  _HazirDiyetlerDetayScreenState createState() =>
-      _HazirDiyetlerDetayScreenState();
-}
-
-class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
-  bool selected = false;
-
   Widget build(BuildContext context) {
     final HazirDiyetScreenArgs args = ModalRoute.of(context).settings.arguments;
     final mediaQuery = MediaQuery.of(context);
@@ -53,11 +45,9 @@ class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
           Container(
               height: (mediaQuery.size.height - mediaQuery.padding.top) * 0.06,
               child: (args.fiyat == 0)
-                  ? InkWell(
-                      onTap: () async {
-                        setState(() {
-                          selected = !selected;
-                        });
+                  ? Bounce(
+                      duration: Duration(milliseconds: 250),
+                      onPressed: () async {
                         final status = await Permission.storage.request();
                         if (status.isGranted) {
                           final externalDir =
@@ -72,15 +62,10 @@ class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
                         } else {
                           print("Permission deined");
                         }
-                        setState(() {
-                          selected = !selected;
-                        });
                       },
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 100),
-                        curve: Curves.fastOutSlowIn,
+                      child: Container(
                         decoration: BoxDecoration(
-                          color: selected ?  Colors.blueGrey : Colors.blueGrey[50],
+                          color: Colors.blueGrey[50],
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                         ),
@@ -109,18 +94,12 @@ class _HazirDiyetlerDetayScreenState extends State<HazirDiyetlerDetayScreen> {
                         ),
                       ),
                     )
-                  : InkWell(
-                      onTap: () => {setState(() {
-                        selected = !selected;
-                      }),
-                      },
-                      child: AnimatedContainer(
-                       // width: selected ? 200.0 : 100.0,
-                       // height: selected ? 100.0 : 200.0,
-                        duration: Duration(milliseconds: 100),
-                        curve: Curves.fastOutSlowIn,
+                  : Bounce(
+                      duration: Duration(milliseconds: 110),
+                      onPressed: () => print('satin al'),
+                      child: Container(
                         decoration: BoxDecoration(
-                          color: selected ?  Colors.blueGrey : Colors.blueGrey[50],
+                          color: Colors.blueGrey[50],
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(10),
                         ),

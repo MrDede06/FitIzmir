@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
+import 'package:flutter_bounce/flutter_bounce.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -63,8 +64,9 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(1),
                   children: <Widget>[
                     Container(
-                      child: InkWell(
-                        onTap: () {
+                      child: Bounce(
+                        duration: Duration(milliseconds: 110),
+                        onPressed: () {
                           print("profil");
                         },
                         child: Image(
@@ -73,8 +75,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: InkWell(
-                        onTap: () {
+                      child: Bounce(
+                        duration: Duration(milliseconds: 110),
+                        onPressed: () {
                           print("profil");
                         },
                         child: Image(
@@ -83,8 +86,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: InkWell(
-                        onTap: () {
+                      child: Bounce(
+                        duration: Duration(milliseconds: 110),
+                        onPressed: () {
                           print("profil");
                         },
                         child: Image(
@@ -93,16 +97,18 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: InkWell(
-                        onTap: () {},
+                      child: Bounce(
+                        duration: Duration(milliseconds: 110),
+                        onPressed: () {},
                         child: Image(
                           image: AssetImage("assets/images/onlinediyet.jpg"),
                         ),
                       ),
                     ),
                     Container(
-                      child: InkWell(
-                        onTap: () {
+                      child: Bounce(
+                        duration: Duration(milliseconds: 110),
+                        onPressed: () {
                           Navigator.of(context)
                               .pushNamed(HazirDiyetlerScreen.routeName);
                         },
@@ -112,8 +118,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      child: InkWell(
-                        onTap: () {
+                      child: Bounce(
+                        duration: Duration(milliseconds: 250),
+                        onPressed: () {
                           print("profil");
                         },
                         child: Image(
