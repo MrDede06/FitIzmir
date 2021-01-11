@@ -40,7 +40,23 @@ class _AuthFormState extends State<AuthForm> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(
+      child: Column(
+        children: <Widget>[
+          SizedBox(
+            height: 60,
+          ),
+          Image(
+            image: AssetImage('assets/images/logo1.png'),
+            width: 160,
+            height: 160,
+          ),
+          SizedBox(
+            height: 25,
+          ),
+          Card(
+        elevation: 15,
+        shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(15.0)),
         margin: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Padding(
@@ -61,7 +77,11 @@ class _AuthFormState extends State<AuthForm> {
                     },
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      labelText: 'Email address',
+                      hintText: 'Email address',
+                      hintStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
                     ),
                     onSaved: (value) {
                       _userEmail = value;
@@ -76,7 +96,13 @@ class _AuthFormState extends State<AuthForm> {
                         }
                         return null;
                       },
-                      decoration: InputDecoration(labelText: 'Username'),
+                      decoration: InputDecoration(
+                          hintText: 'Username',
+                        hintStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                        ),
+                      ),
                       onSaved: (value) {
                         _userName = value;
                       },
@@ -89,7 +115,13 @@ class _AuthFormState extends State<AuthForm> {
                       }
                       return null;
                     },
-                    decoration: InputDecoration(labelText: 'Password'),
+                    decoration: InputDecoration(
+                        hintText: 'Password',
+                      hintStyle: TextStyle(
+                        color: Colors.black,
+                        fontSize: 16,
+                      ),
+                    ),
                     obscureText: true,
                     onSaved: (value) {
                       _userPassword = value;
@@ -99,15 +131,30 @@ class _AuthFormState extends State<AuthForm> {
                   if (widget.isLoading) CircularProgressIndicator(),
                   if (!widget.isLoading)
                     RaisedButton(
-                      child: Text(_isLogin ? 'Login' : 'Signup'),
+                      child: _isLogin ? Text(
+                        "Login",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ) : Text(
+                          "Signup",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       onPressed: _trySubmit,
                     ),
                   if (!widget.isLoading)
                     FlatButton(
-                      textColor: Theme.of(context).primaryColor,
-                      child: Text(_isLogin
-                          ? 'Create new account'
-                          : 'I already have an account'),
+                      textColor: Colors.blueGrey,
+                      child: _isLogin ? Text(
+                          "Create new account", style: TextStyle(
+                        color: Colors.black,
+                      ),)
+                          : Text("I already have an account",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),),
                       onPressed: () {
                         setState(() {
                           _isLogin = !_isLogin;
@@ -119,6 +166,8 @@ class _AuthFormState extends State<AuthForm> {
             ),
           ),
         ),
+      ),
+      ],
       ),
     );
   }

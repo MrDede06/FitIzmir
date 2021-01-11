@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fitizmir/screens/hazir_diyetler_screen.dart';
 import 'package:flutter_bounce/flutter_bounce.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -68,6 +69,7 @@ class HomeScreen extends StatelessWidget {
                         duration: Duration(milliseconds: 110),
                         onPressed: () {
                           print("profil");
+
                         },
                         child: Image(
                           image: AssetImage("assets/images/profil.png"),
@@ -79,6 +81,7 @@ class HomeScreen extends StatelessWidget {
                         duration: Duration(milliseconds: 110),
                         onPressed: () {
                           print("profil");
+                          FirebaseAuth.instance.signOut();
                         },
                         child: Image(
                           image: AssetImage("assets/images/ekibimiz.jpg"),
