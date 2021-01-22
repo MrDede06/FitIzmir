@@ -33,7 +33,8 @@ class HazirDiyetlerScreen extends StatelessWidget {
             FirebaseFirestore.instance.collection("HazirPaketler").snapshots(),
         builder: (ctx, categorySnapshot) {
           if (categorySnapshot.connectionState == ConnectionState.waiting)
-            return CircularProgressIndicator();
+            return Center(
+              child: CircularProgressIndicator());
           final paketler = categorySnapshot.data.documents;
           return GridView.builder(
             primary: false,

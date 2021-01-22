@@ -39,7 +39,9 @@ class _AuthFormState extends State<AuthForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return ListView(
+      children: <Widget>[
+      Center(
       child: Column(
         children: <Widget>[
           SizedBox(
@@ -71,13 +73,13 @@ class _AuthFormState extends State<AuthForm> {
                     key: ValueKey('email'),
                     validator: (value) {
                       if (value.isEmpty || !value.contains('@')) {
-                        return 'Please enter a valid email address.';
+                        return 'Lütfen geçerli bir mail adresi giriniz!';
                       }
                       return null;
                     },
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
-                      hintText: 'Email address',
+                      hintText: 'Email adresi',
                       hintStyle: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -92,12 +94,12 @@ class _AuthFormState extends State<AuthForm> {
                       key: ValueKey('username'),
                       validator: (value) {
                         if (value.isEmpty || value.length < 4) {
-                          return 'Please enter at least 4 characters';
+                          return 'Lütfen en az 4 karakter giriniz!';
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                          hintText: 'Username',
+                          hintText: 'Kullanıcı Adı',
                         hintStyle: TextStyle(
                           color: Colors.black,
                           fontSize: 16,
@@ -111,12 +113,12 @@ class _AuthFormState extends State<AuthForm> {
                     key: ValueKey('password'),
                     validator: (value) {
                       if (value.isEmpty || value.length < 7) {
-                        return 'Password must be at least 7 characters long.';
+                        return 'Şifre en az 7 karakterli olmalı';
                       }
                       return null;
                     },
                     decoration: InputDecoration(
-                        hintText: 'Password',
+                        hintText: 'Şifre',
                       hintStyle: TextStyle(
                         color: Colors.black,
                         fontSize: 16,
@@ -132,12 +134,12 @@ class _AuthFormState extends State<AuthForm> {
                   if (!widget.isLoading)
                     RaisedButton(
                       child: _isLogin ? Text(
-                        "Login",
+                        "Kullanıcı Girişi",
                         style: TextStyle(
                           color: Colors.black,
                         ),
                       ) : Text(
-                          "Signup",
+                          "Kayıt Olun",
                         style: TextStyle(
                           color: Colors.black,
                         ),
@@ -148,10 +150,10 @@ class _AuthFormState extends State<AuthForm> {
                     FlatButton(
                       textColor: Colors.blueGrey,
                       child: _isLogin ? Text(
-                          "Create new account", style: TextStyle(
+                          "Yeni hesap açın", style: TextStyle(
                         color: Colors.black,
                       ),)
-                          : Text("I already have an account",
+                          : Text("Benim zaten bir hesabım var",
                         style: TextStyle(
                           color: Colors.black,
                         ),),
@@ -169,6 +171,6 @@ class _AuthFormState extends State<AuthForm> {
       ),
       ],
       ),
-    );
+    ),],);
   }
 }
